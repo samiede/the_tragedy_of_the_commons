@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 167073458077151015}
   - component: {fileID: 7834482639821016225}
   - component: {fileID: 4587956133950463803}
-  m_Layer: 0
+  - component: {fileID: 1094678211248548498}
+  m_Layer: 6
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,12 +96,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dc9c6d05fc94b8d8feb33c8eb75562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 4
   urbanColor: {fileID: 2100000, guid: dda779976e91649ab84ebd0b5e12c543, type: 2}
-  forrestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
-  agricultureColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
-  unoccupiedColor: {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
+  urbanPrefabs: []
+  windColor: {fileID: 2100000, guid: 8ca4177855e45467eacbc270dcd86de5, type: 2}
+  wind: 0
+  coalColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
+  coal: 0
+  waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
+  forestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
+  waterPrefab: {fileID: 0}
+  forestPrefabs: []
+  defaultPrefab: {fileID: 0}
+  defaultColor: {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
   altitude: 0
+  spawnPoint: {fileID: 3938072863882221343}
+--- !u!65 &1094678211248548498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047195588042629408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5507404006777559962
 GameObject:
   m_ObjectHideFlags: 0

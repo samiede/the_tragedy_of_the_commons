@@ -34,7 +34,7 @@ public class GridGenerator : MonoBehaviour
             {
                     Vector3 tilePosition = CoordToPosition(x, y, tileScale);
                     Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, mapHolder);
-                    newTile.type = CellType.Unoccupied;
+                    newTile.type = CellType.Default;
                     allCells.Add(newTile);
             }
         }
