@@ -30,6 +30,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
+    [SerializeField] private GameObject coalPrefab;
     [SerializeField] private float coal;
 
     [Header("Environment")] 
@@ -44,7 +45,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private float altitude = 0;
     [SerializeField] private Transform spawnPoint;
     
-    private bool isBuiltOn = false;
+    [SerializeField] private bool isBuiltOn = false;
     private float nextTick = 0f;
     private GameObject topObject;
 
@@ -55,6 +56,8 @@ public class Cell : MonoBehaviour
         {
             StartCoroutine(DestroyGameObject(topObject.gameObject));
         }
+        float scale = Random.Range(0.5f, 1f);
+        Vector3 localScaleVect = new Vector3(scale, scale, scale);
         
         switch (type)
         {
@@ -65,16 +68,19 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = windColor;
                 break;
             case CellType.Water:
+                topObject = Instantiate(waterPrefab, spawnPoint.position, Quaternion.identity);
+                topObject.transform.parent = transform;
                 GetComponent<MeshRenderer>().material = waterColor;
                 break;
             case CellType.Coal:
+                topObject = Instantiate(coalPrefab, spawnPoint.position, Quaternion.identity);
+                topObject.transform.localScale = localScaleVect;
+                topObject.transform.parent = transform;
                 GetComponent<MeshRenderer>().material = coalColor;
                 break;            
             case CellType.Forest:
                 GetComponent<MeshRenderer>().material = forestColor;
                 topObject = Instantiate(forestPrefabs[Random.Range(0, forestPrefabs.Count)], spawnPoint.position, Quaternion.identity);
-                float scale = Random.Range(0.5f, 1f);
-                Vector3 localScaleVect = new Vector3(scale, scale, scale);
                 topObject.transform.localScale = localScaleVect;
                 topObject.transform.parent = transform;
                 break;
@@ -84,7 +90,7 @@ public class Cell : MonoBehaviour
         }
 
         transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
-        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.1f - transform.localScale.y / 2f)), transform.position.z);
+        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.1f - transform.localScale.y / 2)), transform.position.z);
         transform.localPosition = pos;
 
     }
