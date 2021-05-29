@@ -114,7 +114,7 @@ MonoBehaviour:
   coalPerTick: 10
   waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
   forestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
-  waterPrefab: {fileID: 0}
+  waterPrefab: {fileID: 919132149155446097, guid: a3f6121a63f4b48359fa378107112795, type: 3}
   forestPrefabs:
   - {fileID: 919132149155446097, guid: c3ab524a3af61ae4593d481bde5ffd88, type: 3}
   - {fileID: 919132149155446097, guid: 92f500f75bd272747aae9c936cafe3a5, type: 3}

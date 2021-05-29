@@ -71,8 +71,8 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = windColor;
                 break;
             case CellType.Water:
-                topObject = Instantiate(waterPrefab, spawnPoint.position, Quaternion.identity);
-                topObject.transform.parent = transform;
+                // topObject = Instantiate(waterPrefab, spawnPoint.position, Quaternion.identity);
+                // topObject.transform.parent = transform;
                 GetComponent<MeshRenderer>().material = waterColor;
                 break;
             case CellType.Coal:

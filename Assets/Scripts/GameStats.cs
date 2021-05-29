@@ -14,7 +14,7 @@ public class GameStats : ScriptableObject
         Reset();
     }
 
-    void Reset()
+    public void Reset()
     {
         pollution = 0;
         money = 0;
