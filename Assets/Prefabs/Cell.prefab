@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 167073458077151015}
   - component: {fileID: 7834482639821016225}
   - component: {fileID: 4587956133950463803}
-  m_Layer: 0
+  - component: {fileID: 1094678211248548498}
+  m_Layer: 6
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,6 +111,19 @@ MonoBehaviour:
   defaultColor: {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
   altitude: 0
   spawnPoint: {fileID: 3938072863882221343}
+--- !u!65 &1094678211248548498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047195588042629408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5507404006777559962
 GameObject:
   m_ObjectHideFlags: 0
