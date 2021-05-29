@@ -10,24 +10,32 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private Cell cellPrefab;
 
     private Coord mapCenter;
-
+    private List<Cell> allCells;
+    public List<Cell> AlLCell => allCells;
+    
     public void GenerateMap()
     {
+        allCells = new List<Cell>();
         mapCenter = new Coord((int) mapSize.x / 2,(int) mapSize.y / 2);
         
         Vector3 tileScale = cellPrefab.transform.localScale;
+        
+        string holderName = "Generated Map";
+        if (transform.Find(holderName))
+        {
+            DestroyImmediate(transform.Find(holderName).gameObject);
+        }
+        Transform mapHolder = new GameObject(holderName).transform;
+        mapHolder.parent = transform;
 
         for (int x = 0; x < mapSize.x; x++)
         {
             for (int y = 0; y < mapSize.y; y++)
             {
                     Vector3 tilePosition = CoordToPosition(x, y, tileScale);
-                    Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, transform);
+                    Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, mapHolder);
                     newTile.type = CellType.Unoccupied;
-                    // Vector3 scale = new Vector3(tileScale.x, 0, tileScale.z) * (1 - outlinePercent);
-                    // scale.y = tileScale.y;
-                    // newTile.transform.localScale = scale;
-
+                    allCells.Add(newTile);
             }
         }
     }

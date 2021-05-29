@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047195588042629408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1972911, y: 2.1089096, z: -11.498555}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_Children:
   - {fileID: 3938072863882221343}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dc9c6d05fc94b8d8feb33c8eb75562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 3
+  urbanColor: {fileID: 2100000, guid: dda779976e91649ab84ebd0b5e12c543, type: 2}
+  forrestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
+  agricultureColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
+  unoccupiedColor: {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
+  altitude: 0
 --- !u!1 &5507404006777559962
 GameObject:
   m_ObjectHideFlags: 0
