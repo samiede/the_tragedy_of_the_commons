@@ -25,13 +25,14 @@ public class Cell : MonoBehaviour
     [Header("Wind")]
     [SerializeField] private Material windColor;
     [SerializeField] private float windCooldown;
-    
+    [SerializeField] private int windPerTick;
     [Header("Coal")]
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
+    [SerializeField] private int coalPerTick;
 
     [Header("Environment")] 
     [SerializeField] private Material waterColor;
@@ -44,6 +45,8 @@ public class Cell : MonoBehaviour
     [SerializeField] private Material defaultColor;
     [SerializeField] private float altitude = 0;
     [SerializeField] private Transform spawnPoint;
+
+    [Header("Stats")] [SerializeField] private GameStats stats;
     
     [SerializeField] private bool isBuiltOn = false;
     private float nextTick = 0f;
@@ -105,14 +108,17 @@ public class Cell : MonoBehaviour
             switch (type)
             {
                 case CellType.Coal:
-                    if (Time.time >= nextTick)
+                    if (Time.time >= nextTick && coal > 0)
                     {
-                        nextTick =  Time.time + coalCooldown;
+                        stats.money += coalPerTick;
+                        coal -= coalPerTick;
+                        nextTick = Time.time + coalCooldown;
                     }
                     break;
                 case CellType.Wind:
                     if (Time.time >= nextTick)
                     {
+                        stats.money += windPerTick;
                         nextTick = Time.time + windCooldown;
                     }
                     break;
@@ -130,6 +136,14 @@ public class Cell : MonoBehaviour
 
     public void Build()
     {
-        
+        if (type == CellType.Coal)
+        {
+            isBuiltOn = true;
+            if (topObject != null)
+            {
+                Destroy(topObject.gameObject);
+            }
+            topObject = Instantiate(minePrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+        }
     }
 }

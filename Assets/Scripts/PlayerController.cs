@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
                 Cell cell = hit.transform.GetComponent<Cell>();
                 if (cell)
                 {
-                    Debug.Log(cell.type);
+                    cell.Build();
                 }
             }
 
