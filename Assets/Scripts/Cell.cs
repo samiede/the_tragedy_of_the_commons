@@ -26,6 +26,7 @@ public class Cell : MonoBehaviour
     
     [Header("Coal")]
     [SerializeField] private Material coalColor;
+    [SerializeField] private GameObject minePrefab;
     [SerializeField] private float coal;
 
     [Header("Environment")] 
