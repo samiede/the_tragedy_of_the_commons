@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameStats : ScriptableObject
 {
     public float  pollution = 0f;
-    public int money = 0;
+    public float money = 0;
     public int seaLevel = 0;
     
     public void OnEnable()

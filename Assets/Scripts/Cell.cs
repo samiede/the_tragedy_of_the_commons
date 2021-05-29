@@ -25,14 +25,14 @@ public class Cell : MonoBehaviour
     [Header("Wind")]
     [SerializeField] private Material windColor;
     [SerializeField] private float windCooldown;
-    [SerializeField] private int windPerTick;
+    [SerializeField] private float windPerTick;
     [Header("Coal")]
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
-    [SerializeField] private int coalPerTick;
+    [SerializeField] private float coalPerTick;
 
     [Header("Environment")] 
     [SerializeField] private Material waterColor;
