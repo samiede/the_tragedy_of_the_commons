@@ -30,7 +30,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
-    [SerializeField] private GameObject coalPrefab;
+    [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
 
     [Header("Environment")] 
@@ -73,8 +73,10 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = waterColor;
                 break;
             case CellType.Coal:
-                topObject = Instantiate(coalPrefab, spawnPoint.position, Quaternion.identity);
-                topObject.transform.localScale = localScaleVect;
+                if (!isBuiltOn)
+                    topObject = Instantiate(coalPrefabs[Random.Range(0, coalPrefabs.Count)], spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+                else
+                    topObject = Instantiate(minePrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
                 topObject.transform.parent = transform;
                 GetComponent<MeshRenderer>().material = coalColor;
                 break;            
@@ -90,7 +92,7 @@ public class Cell : MonoBehaviour
         }
 
         transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
-        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.1f - transform.localScale.y / 2)), transform.position.z);
+        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.2f - transform.localScale.y / 2)), transform.position.z);
         transform.localPosition = pos;
 
     }
