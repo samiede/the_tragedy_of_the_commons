@@ -53,14 +53,18 @@ public class Cell : MonoBehaviour
     private GameObject topObject;
 
 
-    private void OnValidate()
+    private void Start()
     {
-        if (topObject != null)
-        {
-            StartCoroutine(DestroyGameObject(topObject.gameObject));
-        }
-        float scale = Random.Range(0.5f, 1f);
-        Vector3 localScaleVect = new Vector3(scale, scale, scale);
+        UpdateTile();
+    }
+
+    private void UpdateTile()
+    {
+         if (topObject != null) 
+             StartCoroutine(DestroyGameObject(topObject.gameObject));
+         
+         float scale = Random.Range(0.5f, 1f);
+         Vector3 localScaleVect = new Vector3(scale, scale, scale);
         
         switch (type)
         {
@@ -95,8 +99,13 @@ public class Cell : MonoBehaviour
         }
 
         transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
-        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.2f - transform.localScale.y / 2)), transform.position.z);
+        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - transform.localScale.y / 2)), transform.position.z);
         transform.localPosition = pos;
+    }
+
+    private void OnValidate()
+    {
+       UpdateTile();
 
     }
 
