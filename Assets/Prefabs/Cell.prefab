@@ -96,17 +96,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dc9c6d05fc94b8d8feb33c8eb75562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  type: 5
   urbanColor: {fileID: 2100000, guid: dda779976e91649ab84ebd0b5e12c543, type: 2}
-  urbanPrefabs: []
+  urbanPrefabs:
+  - {fileID: 0}
   windColor: {fileID: 2100000, guid: 8ca4177855e45467eacbc270dcd86de5, type: 2}
-  wind: 0
+  windCooldown: 0
   coalColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
+  coalCooldown: 0
+  minePrefab: {fileID: 0}
   coal: 0
   waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
   forestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
   waterPrefab: {fileID: 0}
-  forestPrefabs: []
+  forestPrefabs:
+  - {fileID: 919132149155446097, guid: c3ab524a3af61ae4593d481bde5ffd88, type: 3}
+  - {fileID: 919132149155446097, guid: 92f500f75bd272747aae9c936cafe3a5, type: 3}
   defaultPrefab: {fileID: 0}
   defaultColor: {fileID: 2100000, guid: ae4168e61668047c998ef678679f8a19, type: 2}
   altitude: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Random = UnityEngine.Random;
 
 
 public enum CellType {
@@ -10,6 +11,7 @@ public enum CellType {
     Wind,
     Coal,
     Water,
+    Forest,
     Default
 }
 public class Cell : MonoBehaviour
@@ -44,10 +46,16 @@ public class Cell : MonoBehaviour
     
     private bool isBuiltOn = false;
     private float nextTick = 0f;
+    private GameObject topObject;
 
 
     private void OnValidate()
     {
+        if (topObject != null)
+        {
+            StartCoroutine(DestroyGameObject(topObject.gameObject));
+        }
+        
         switch (type)
         {
             case CellType.Urban:
@@ -61,6 +69,14 @@ public class Cell : MonoBehaviour
                 break;
             case CellType.Coal:
                 GetComponent<MeshRenderer>().material = coalColor;
+                break;            
+            case CellType.Forest:
+                GetComponent<MeshRenderer>().material = forestColor;
+                topObject = Instantiate(forestPrefabs[Random.Range(0, forestPrefabs.Count)], spawnPoint.position, Quaternion.identity);
+                float scale = Random.Range(0.5f, 1f);
+                Vector3 localScaleVect = new Vector3(scale, scale, scale);
+                topObject.transform.localScale = localScaleVect;
+                topObject.transform.parent = transform;
                 break;
             default:
                 GetComponent<MeshRenderer>().material = defaultColor;
@@ -96,6 +112,12 @@ public class Cell : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private IEnumerator DestroyGameObject(GameObject gameObject) 
+    {
+        yield return new WaitForSeconds(0);
+        DestroyImmediate(gameObject);
     }
 
     public void Build()
