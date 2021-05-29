@@ -22,10 +22,11 @@ public class Cell : MonoBehaviour
     
     [Header("Wind")]
     [SerializeField] private Material windColor;
-    [SerializeField] private float wind;
+    [SerializeField] private float windCooldown;
     
     [Header("Coal")]
     [SerializeField] private Material coalColor;
+    [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private float coal;
 
@@ -42,6 +43,8 @@ public class Cell : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     
     private bool isBuiltOn = false;
+    private float nextTick = 0f;
+
 
     private void OnValidate()
     {
@@ -68,5 +71,35 @@ public class Cell : MonoBehaviour
         Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.1f - transform.localScale.y / 2f)), transform.position.z);
         transform.localPosition = pos;
 
+    }
+
+    private void Update()
+    {
+        
+        if (isBuiltOn)
+        {
+            switch (type)
+            {
+                case CellType.Coal:
+                    if (Time.time >= nextTick)
+                    {
+                        nextTick =  Time.time + coalCooldown;
+                    }
+                    break;
+                case CellType.Wind:
+                    if (Time.time >= nextTick)
+                    {
+                        nextTick = Time.time + windCooldown;
+                    }
+                    break;
+                case CellType.Default:
+                    break;
+            }
+        }
+    }
+
+    public void Build()
+    {
+        
     }
 }
