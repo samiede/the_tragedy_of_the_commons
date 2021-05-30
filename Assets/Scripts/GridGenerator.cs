@@ -29,8 +29,8 @@ public class GridGenerator : MonoBehaviour
         mapHolder.parent = transform;
         
 
-        int[,] mapCoal = new int[mapSize.x,mapSize.y]; 
-        string m_Path = Application.dataPath + "/map_island.csv";
+        int[,] mapCoal = new int[mapSize.x*2,mapSize.y]; 
+        string m_Path = Application.dataPath + "/map_island2.csv";
         using(var reader = new StreamReader(@m_Path))
         {
             int i = 0;
@@ -58,7 +58,8 @@ public class GridGenerator : MonoBehaviour
             {
                     Vector3 tilePosition = CoordToPosition(x, y, tileScale);
                     Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, mapHolder);
-                    newTile.altitude = 2;
+                    newTile.altitude = 0.2f;
+                    
                     if (mapCoal[x, y] == 1)
                     {
                         newTile.type = CellType.Urban;
@@ -82,11 +83,13 @@ public class GridGenerator : MonoBehaviour
                     else if (mapCoal[x, y] == 0)
                     {
                         newTile.type = CellType.Default;
+                        newTile.altitude =  1;
                     }
-                    if (mapCoal[x, y] == 4)
-                    {
-                        newTile.altitude = 1; // how to set it to 0.2?
-                    }
+
+                    
+                    
+                    newTile.altitude =  (float) mapCoal[x+mapSize.x, y] /4;
+                    
                     
                 
                     allCells.Add(newTile);
