@@ -69,14 +69,14 @@ public class Cell : MonoBehaviour
         UpdateTile();
     }
 
-    private void UpdateTile()
+    public void UpdateTile()
     {
          if (topObject != null) 
              StartCoroutine(DestroyGameObject(topObject.gameObject));
          
          float scale = Random.Range(0.5f, 1f);
          Vector3 localScaleVect = new Vector3(scale, scale, scale);
-    
+
          float height = Mathf.Max(0, altitude);
          transform.localScale = new Vector3(1f, height + 0.2f, 1f);
          Vector3 pos = new Vector3(transform.position.x, 0.2f + height / 2, transform.position.z);
@@ -89,7 +89,6 @@ public class Cell : MonoBehaviour
                 topObject = Instantiate(urbanPrefabs[Random.Range(0, urbanPrefabs.Count)], spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
                 topObject.transform.localScale = localScaleVect;
                 topObject.transform.parent = transform;
-                break;
                 break;
             case CellType.Wind:
                 if (isBuiltOn)

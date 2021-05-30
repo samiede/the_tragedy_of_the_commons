@@ -8,8 +8,10 @@ public class GridGenerator : MonoBehaviour
 {
     [SerializeField] private Vector2Int mapSize;
     [SerializeField] private Cell cellPrefab;
+    [SerializeField] private GameStats stats;
 
     private Coord mapCenter;
+    
     private List<Cell> allCells;
     public List<Cell> AlLCell => allCells;
     
@@ -92,6 +94,17 @@ public class GridGenerator : MonoBehaviour
                     allCells.Add(newTile);
             }
         }
+    }
+
+    private void Start()
+    {
+        GenerateMap();
+    }
+
+    [ContextMenu("Check Sea Level")]
+    public void CheckSeaLevel()
+    {
+        
     }
     
     Vector3 CoordToPosition(int x, int y, Vector3 scale)

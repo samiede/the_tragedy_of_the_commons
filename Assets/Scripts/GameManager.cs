@@ -5,11 +5,20 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameStats stats;
-    // Start is called before the first frame update
+    [SerializeField] private int seaLevel;
     void Start()
     {
         stats.Reset();
         
     }
+
+    public void CheckSeaLevel()
+    {
+        
+    }
+    
+    
+    
+    
     
 }
