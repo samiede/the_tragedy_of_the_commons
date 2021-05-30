@@ -71,7 +71,11 @@ public class Cell : MonoBehaviour
          
          float scale = Random.Range(0.5f, 1f);
          Vector3 localScaleVect = new Vector3(scale, scale, scale);
-        
+         
+         transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
+         Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.2f - transform.localScale.y / 2)), transform.position.z);
+         transform.localPosition = pos;
+         
         switch (type)
         {
             case CellType.Urban:
@@ -101,10 +105,6 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = defaultColor;
                 break;
         }
-
-        transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
-        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.2f - transform.localScale.y / 2)), transform.position.z);
-        transform.localPosition = pos;
     }
 
     private void OnValidate()
