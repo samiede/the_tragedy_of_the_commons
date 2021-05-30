@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c960955fa2114b90af07695a94a4b7e, type: 3}
   m_Name: GameStats
   m_EditorClassIdentifier: 
-  pollution: 0
-  money: 0
+  pollution: 6
+  money: 312
   seaLevel: 0
+  currentYear: 1970
+  initialPollution: 0
+  initialMoney: 300
+  initialSeaLevel: 0
+  minePrice: 200
+  windmillPrice: 130

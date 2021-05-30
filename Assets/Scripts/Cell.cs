@@ -33,12 +33,15 @@ public class Cell : MonoBehaviour
     [SerializeField] private float windPerTick;
     [SerializeField] private GameObject windmillPrefab;
     [SerializeField] private GameObject windPrefab;
+    [SerializeField] private AudioClip windmillBuildingSound;
+
     [Header("Coal")]
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
+    [SerializeField] private AudioClip mineBuildingSound;
     public float CoalAmount => coal;
     
     [SerializeField] private float coalPerTick;
@@ -59,16 +62,20 @@ public class Cell : MonoBehaviour
     [Header("Stats and Events")] 
     [SerializeField] private GameStats stats;
     [SerializeField] private GameEvent PollutionIncreased;
+    [SerializeField] private GameEvent MoneyChanged;
+    [SerializeField] private GameObject buildParticles;
     
     [SerializeField] private bool isBuiltOn = false;
     public bool IsBuiltOn => isBuiltOn;
     private float nextTick = 0f;
     private GameObject topObject;
+    private AudioSource _audioSource;
 
 
     private void Start()
     {
         UpdateTile();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateTile()
@@ -146,6 +153,8 @@ public class Cell : MonoBehaviour
                         coal -= coalPerTick;
                         nextTick = Time.time + coalCooldown;
                         PollutionIncreased.Raise();
+                        MoneyChanged.Raise();
+
                     }
                     break;
                 case CellType.Wind:
@@ -153,20 +162,23 @@ public class Cell : MonoBehaviour
                     {
                         stats.money += windPerTick;
                         nextTick = Time.time + windCooldown;
-                    }
-                    break;
-                case CellType.Urban:
-                    if (Time.time >= nextTick)
-                    {
-                        stats.money += urbanPerTick;
-                        stats.pollution += urbanPollutionPerTick;
-                        nextTick = Time.time + urbanCooldown;
-                        PollutionIncreased.Raise();
+                        MoneyChanged.Raise();
                     }
                     break;
                 case CellType.Default:
                     break;
             }
+        }
+
+        if (type == CellType.Urban && Time.time >= nextTick)
+        {
+
+                stats.money += urbanPerTick;
+                stats.pollution += urbanPollutionPerTick;
+                nextTick = Time.time + urbanCooldown;
+                PollutionIncreased.Raise();
+                MoneyChanged.Raise();
+            
         }
     }
 
@@ -186,6 +198,8 @@ public class Cell : MonoBehaviour
                 Destroy(topObject.gameObject);
             }
             topObject = Instantiate(minePrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+            _audioSource.PlayOneShot(mineBuildingSound);
+            
         }
         
         if (type == CellType.Wind)
@@ -196,7 +210,11 @@ public class Cell : MonoBehaviour
                 Destroy(topObject.gameObject);
             }
             topObject = Instantiate(windmillPrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+            _audioSource.PlayOneShot(windmillBuildingSound);
+
         }
+
+        Instantiate(buildParticles, spawnPoint.position, Quaternion.identity);
 
     }
 }

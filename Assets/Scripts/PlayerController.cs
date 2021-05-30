@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -17,7 +18,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject buildButton;
 
     private Cell selectedCell;
-    
+    private AudioSource _audioSource;
+    public Cell SelectedCell => selectedCell;
+
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -35,7 +44,6 @@ public class PlayerController : MonoBehaviour
                 Cell cell = hit.transform.GetComponent<Cell>();
                 if (cell.type == CellType.Coal || cell.type == CellType.Wind)
                 {
-                    Debug.Log(selectedCell);
                     if (cell != selectedCell)
                     {
                         selectedCell = cell;
@@ -51,16 +59,14 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (Input.GetButtonDown("Fire1") && EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("Over UI");
-        }
+
     }
     
     
 
     private void OpenBuildingUI()
     {
+        _audioSource.PlayOneShot(_audioSource.clip);
         buildingCanvas.gameObject.SetActive(true);
         if (selectedCell.type == CellType.Coal)
         {
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour
                 popupTitle.SetText("Windmill");
                 buildButton.SetActive(false);
                 buildingPrice.enabled = false;
+                
             }
             else
             {
@@ -109,7 +116,6 @@ public class PlayerController : MonoBehaviour
 
     public void BuildOnSelectedCell()
     {
-
         stats.money -= (selectedCell.type == CellType.Coal) ? stats.minePrice : stats.windmillPrice; 
         selectedCell.Build();
         DismissBuildingUI();
