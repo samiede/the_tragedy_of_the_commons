@@ -31,7 +31,7 @@ public class GridGenerator : MonoBehaviour
         
 
         int[,] mapCoal = new int[mapSize.x*2,mapSize.y]; 
-        string m_Path = Application.dataPath + "/map_island2.csv";
+        string m_Path = Application.dataPath + "/map_island3.csv";
         using(var reader = new StreamReader(@m_Path))
         {
             int i = 0;
@@ -44,7 +44,7 @@ public class GridGenerator : MonoBehaviour
                 int j = 0;
                 foreach (var val in values)
                 {
-                    
+                    Debug.Log(val);
                     mapCoal[i, j] = Int32.Parse(val);
                     j += 1;
                 }
@@ -59,8 +59,9 @@ public class GridGenerator : MonoBehaviour
             {
                     Vector3 tilePosition = CoordToPosition(x, y, tileScale);
                     Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, mapHolder);
-                    newTile.altitude = 0.2f;
                     
+                    newTile.altitude =  (float) mapCoal[x+mapSize.x, y] /4;
+
                     if (mapCoal[x, y] == 1)
                     {
                         newTile.type = CellType.Urban;
@@ -76,6 +77,7 @@ public class GridGenerator : MonoBehaviour
                     else if (mapCoal[x, y] == 4)
                     {
                         newTile.type = CellType.Water;
+                        newTile.altitude = 0;
                     }
                     else if (mapCoal[x, y] == 5)
                     {
@@ -83,13 +85,12 @@ public class GridGenerator : MonoBehaviour
                     }
                     else if (mapCoal[x, y] == 0)
                     {
-                        newTile.type = CellType.Default;
-                        newTile.altitude =  1;
+                        newTile.type = CellType.Default;                        
                     }
 
                     
                     
-                    newTile.altitude =  (float) mapCoal[x+mapSize.x, y] /4;
+                    
                     
                     
                 
