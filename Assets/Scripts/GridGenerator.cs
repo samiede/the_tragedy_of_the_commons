@@ -19,7 +19,7 @@ public class GridGenerator : MonoBehaviour
     
     private void Start()
     {
-        GenerateMap();
+        // GenerateMap();
         _audioSource = GetComponent<AudioSource>();
 
     }

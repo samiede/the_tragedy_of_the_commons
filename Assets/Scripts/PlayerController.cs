@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                buildButton.SetActive(true);
                 buildingPrice.enabled = true;
                 popupTitle.SetText("Coal");
                 buildingPrice.SetText("Price: " + stats.minePrice);
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                buildButton.SetActive(true);
                 buildingPrice.enabled = true;
                 popupTitle.SetText("Wind");
                 buildingPrice.SetText("Price: " + stats.windmillPrice);

@@ -15,7 +15,7 @@ public enum CellType {
     Default
 }
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 public class Cell : MonoBehaviour
 {
     public CellType type;

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int startYear;
     [SerializeField] private int endYear;
     [SerializeField] private int secondsPerYear;
+    [SerializeField] private GridGenerator _generator;
     
     private bool isRunning;
     private WaitForSeconds yearTime;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         stats.Reset();
+        _generator.GenerateMap();
         isRunning = true;
         stats.currentYear = startYear;
         YearIncreased.Raise();
