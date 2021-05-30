@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     {
         stats.Reset();
         isRunning = true;
-        yearTime = new WaitForSeconds(secondsPerYear);
         stats.currentYear = startYear;
         YearIncreased.Raise();
         StartCoroutine(CountUpYears());
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
         int currentYear = startYear;
         while (isRunning)
         {
-            yield return yearTime;
+            yield return new WaitForSeconds((float) secondsPerYear / stats.timeScale);;
             currentYear++;
             stats.currentYear = currentYear;
             YearIncreased.Raise();
