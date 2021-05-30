@@ -42,18 +42,14 @@ public class GridGenerator : MonoBehaviour
         
 
         int[,] mapCoal = new int[mapSize.x*2,mapSize.y];
-        
         for (int i = 0; i < mapSize.x*2; i++) 
         {
-            Debug.Log("i: " + i);
             for (int j = 0; j < mapSize.y; j++)
             {
-                Debug.Log("j: " + j);
                 mapCoal[i, j] = Map.map[i*mapSize.x+j];
             }
         }
         
-
         
         for (int x = 0; x < mapSize.x; x++)
         {
