@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GridGenerator : MonoBehaviour
 {
@@ -26,14 +27,75 @@ public class GridGenerator : MonoBehaviour
         }
         Transform mapHolder = new GameObject(holderName).transform;
         mapHolder.parent = transform;
+        
 
+        int[,] mapCoal = new int[mapSize.x,mapSize.y];
+        //Debug.Log("x:" + mapSize.x + ", y: " + mapSize.y);
+        using(var reader = new StreamReader(@"/home/frederik/Schreibtisch/Tomorrowcraft/map_island.csv")) // need to use relative path
+        {
+            List<string> listA = new List<string>();
+            List<string> listB = new List<string>();
+            int i = 0;
+            while (!reader.EndOfStream)
+            {
+                
+                var line = reader.ReadLine();
+                var values = line.Split(',');
+                
+                int j = 0;
+                foreach (var val in values)
+                {
+                    
+                    mapCoal[i, j] = Int32.Parse(val);
+                    j += 1;
+                }
+                i += 1;
+
+                
+                
+                //Console.WriteLine(String.Join("\n", arr)); 
+                //Debug.Log("Debug: " + String.Join("",new List<int>(values).ConvertAll(i => i.ToString()).ToArray()));
+                listA.Add(values[0]);          
+                listB.Add(values[1]);
+
+            }
+        }
+
+        
         for (int x = 0; x < mapSize.x; x++)
         {
             for (int y = 0; y < mapSize.y; y++)
             {
                     Vector3 tilePosition = CoordToPosition(x, y, tileScale);
                     Cell newTile = Instantiate(cellPrefab, tilePosition, Quaternion.identity, mapHolder);
-                    newTile.type = CellType.Default;
+                    if (mapCoal[x, y] == 1)
+                    {
+                        newTile.type = CellType.Urban;
+                    }
+                    else if (mapCoal[x, y] == 2)
+                    {
+                        newTile.type = CellType.Wind;
+                    }
+                    else if (mapCoal[x, y] == 3)
+                    {
+                        newTile.type = CellType.Coal;
+                    }
+                    else if (mapCoal[x, y] == 4)
+                    {
+                        newTile.type = CellType.Water;
+                    }
+                    else if (mapCoal[x, y] == 5)
+                    {
+                        newTile.type = CellType.Forest;
+                    }
+                    else if (mapCoal[x, y] == 0)
+                    {
+                        newTile.type = CellType.Default;
+                        //newTile.altitude = 1; how to do this?
+                    }
+                    
+                    
+
                     allCells.Add(newTile);
             }
         }
