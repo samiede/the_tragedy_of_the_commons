@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7834482639821016225}
   - component: {fileID: 4587956133950463803}
   - component: {fileID: 1094678211248548498}
+  - component: {fileID: 2558961758995060542}
   m_Layer: 6
   m_Name: Cell
   m_TagString: Untagged
@@ -113,6 +114,7 @@ MonoBehaviour:
   windPerTick: 0.25
   windmillPrefab: {fileID: 919132149155446097, guid: 7cc5c18e6a63e49fd97a1088a1a6c387, type: 3}
   windPrefab: {fileID: 0}
+  windmillBuildingSound: {fileID: 8300000, guid: 01119b637249c1f49a2e83f61f2ba5d5, type: 3}
   coalColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
   coalCooldown: 1
   minePrefab: {fileID: 919132149155446097, guid: 74473f2057e9a47629d3e2c8d69f39ca, type: 3}
@@ -121,6 +123,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: ad5a465cd3ab148f98c6dbf0a2278d61, type: 3}
   - {fileID: 919132149155446097, guid: 41e9343a8b3004d73b66aef2cd39c524, type: 3}
   coal: 200
+  mineBuildingSound: {fileID: 8300000, guid: 7d7be897cbe596a4880b44e8910a76aa, type: 3}
   coalPerTick: 0.8
   pollutionPerTick: 1
   waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
@@ -151,6 +154,102 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &2558961758995060542
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047195588042629408}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5507404006777559962
 GameObject:
   m_ObjectHideFlags: 0
