@@ -101,9 +101,18 @@ public class GridGenerator : MonoBehaviour
         GenerateMap();
     }
 
-    [ContextMenu("Check Sea Level")]
-    public void CheckSeaLevel()
+    public void SetSeaLevel()
     {
+        foreach (Cell cell in allCells)
+        {
+            if (cell.altitude <= stats.seaLevel)
+            {
+                cell.type = CellType.Water;
+                cell.altitude = stats.seaLevel;
+                cell.UpdateTile();
+            }
+            
+        }
         
     }
     
