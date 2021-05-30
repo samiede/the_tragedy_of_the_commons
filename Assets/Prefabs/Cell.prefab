@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047195588042629408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_Children:
   - {fileID: 3938072863882221343}
@@ -99,10 +99,20 @@ MonoBehaviour:
   type: 5
   urbanColor: {fileID: 2100000, guid: dda779976e91649ab84ebd0b5e12c543, type: 2}
   urbanPrefabs:
-  - {fileID: 0}
+  - {fileID: 919132149155446097, guid: 2820c29266dad43c9aa0a57c334b3baf, type: 3}
+  - {fileID: 919132149155446097, guid: 308e9131358a44cef9d6606128e5d1bb, type: 3}
+  - {fileID: 919132149155446097, guid: a85a99bc7eaa9438aba6ff39525c5917, type: 3}
+  - {fileID: 919132149155446097, guid: a35db3714b33a44ceaa103f92656c309, type: 3}
+  - {fileID: 919132149155446097, guid: b498ad41b24d347cba222c9bac0e3190, type: 3}
+  - {fileID: 919132149155446097, guid: a8a0b4e55b9a4438ca04bffb6d05810b, type: 3}
+  urbanPerTick: 0
+  urbanPollutionPerTick: 0
+  urbanCooldown: 0
   windColor: {fileID: 2100000, guid: 8ca4177855e45467eacbc270dcd86de5, type: 2}
   windCooldown: 0
   windPerTick: 0
+  windmillPrefab: {fileID: 919132149155446097, guid: 7cc5c18e6a63e49fd97a1088a1a6c387, type: 3}
+  windPrefab: {fileID: 0}
   coalColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
   coalCooldown: 1
   minePrefab: {fileID: 919132149155446097, guid: 74473f2057e9a47629d3e2c8d69f39ca, type: 3}
@@ -112,7 +122,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 41e9343a8b3004d73b66aef2cd39c524, type: 3}
   coal: 1000
   coalPerTick: 10
-  pollutionPerTick: 0
+  pollutionPerTick: 1
   waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
   forestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
   waterPrefab: {fileID: 919132149155446097, guid: a3f6121a63f4b48359fa378107112795, type: 3}
