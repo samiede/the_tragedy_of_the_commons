@@ -26,7 +26,7 @@ public class IngameUI : MonoBehaviour
 
     public void UpdateMoney()
     {
-        moneyText.SetText("Money: " + stats.money);
+        moneyText.SetText("Money: " + (int) Math.Round(stats.money));
     }
 
     public void UpdateCurrentYear()

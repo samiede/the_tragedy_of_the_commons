@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         if (tempSeaLevel == 5)
         {
             isRunning = false;
-            Debug.Log("Yoi lopse");
+            Debug.Log("Yoi lopse lol");
         }
     }
     
