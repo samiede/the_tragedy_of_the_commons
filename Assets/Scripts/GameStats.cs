@@ -11,7 +11,8 @@ public class GameStats : ScriptableObject
     public float money = 0;
     public int seaLevel = 0;
     public int currentYear;
-    public int timeScale = 1;
+    public int _timeScale = 1;
+    public int timeScale => Mathf.Max(1, _timeScale);
     
     [Header("Initial values")]
     public float initialPollution = 0f;

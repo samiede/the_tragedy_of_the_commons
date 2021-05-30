@@ -69,12 +69,14 @@ public class Cell : MonoBehaviour
     private float nextTick = 0f;
     private GameObject topObject;
     private AudioSource _audioSource;
+    private Transform _transform;
 
 
     private void Start()
     {
         UpdateTile();
         _audioSource = GetComponent<AudioSource>();
+        _transform = transform;
     }
 
     public void UpdateTile()
@@ -84,7 +86,7 @@ public class Cell : MonoBehaviour
          
          float scale = Random.Range(0.5f, 1f);
          Vector3 localScaleVect = new Vector3(scale, scale, scale);
-
+        
          float height = Mathf.Max(0, altitude);
          transform.localScale = new Vector3(1f, height + 0.2f, 1f);
          Vector3 pos = new Vector3(transform.position.x, 0.2f + height / 2, transform.position.z);
@@ -130,6 +132,33 @@ public class Cell : MonoBehaviour
                 break;
         }
     }
+    
+    public void SetTileHeight(float heightToSet) {
+        
+                Debug.Log(heightToSet);
+             float height = Mathf.Max(0, heightToSet);
+             transform.localScale = new Vector3(1f, height + 0.2f, 1f);
+             Vector3 pos = new Vector3(transform.position.x, 0.2f + height / 2, transform.position.z);
+             transform.localPosition = pos;
+    }
+
+    // public void StartRising(float level)
+    // {
+    //     StartCoroutine(AnimateWaterRising(level));
+    // }
+
+    // private IEnumerator AnimateWaterRising(float level)
+    // {
+    //     float initialAltitude = altitude;
+    //     float timeElapsed = 0;
+    //     while (timeElapsed <= waterRiseTime)
+    //     {
+    //         float height = Mathf.Lerp(initialAltitude, level, timeElapsed / waterRiseTime);
+    //         SetTileHeight(height);
+    //         timeElapsed += Time.deltaTime;
+    //         yield return null;
+    //     }
+    // }
 
     private void OnValidate()
     {

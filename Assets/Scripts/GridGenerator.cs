@@ -10,7 +10,8 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private Vector2Int mapSize;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private GameStats stats;
-    
+    [SerializeField] private float waterRiseTime = 1f;
+
     private Coord mapCenter;
     private AudioSource _audioSource;
     
@@ -88,6 +89,64 @@ public class GridGenerator : MonoBehaviour
     }
 
 
+    // public void StartRiseSeaLevel()
+    // {
+    //     foreach (Cell cell in allCells)
+    //     {
+    //         if (cell.altitude <= (float) stats.seaLevel / 4)
+    //         {
+    //             cell.type = CellType.Water;
+    //             cell.altitude = (float) stats.seaLevel / 4;
+    //             cell.UpdateTile();
+    //         }
+    //         
+    //     }
+    //     _audioSource.PlayOneShot(_audioSource.clip);
+    // }
+    
+    public void StartRiseSeaLevel()
+    {
+        
+        // foreach (Cell cell in allCells)
+        // {
+        //     if (cell.type == CellType.Water)
+        //     {
+        //         cell.StartRising((float) stats.seaLevel/4);
+        //     }
+        //     // if (cell.altitude <= (float) stats.seaLevel / 4)
+        //     // {
+        //     //     cell.type = CellType.Water;
+        //     //     cell.altitude = (float) stats.seaLevel / 4;
+        //     //     cell.UpdateTile();
+        //     // }   
+        // }
+
+        StartCoroutine(RiseSeaLevel());
+        _audioSource.PlayOneShot(_audioSource.clip);
+    }
+
+    IEnumerator RiseSeaLevel()
+    {
+        float initialHeight = stats.seaLevel - 1;
+        float finalHeight = (float) stats.seaLevel / 4;
+        float elapsedTime = 0;
+        while (elapsedTime <= waterRiseTime)
+        {
+            float toHeight = Mathf.Lerp(initialHeight, finalHeight, elapsedTime / waterRiseTime);
+            foreach (Cell cell in allCells)
+            {
+                if (cell.type == CellType.Water)
+                {
+                    cell.SetTileHeight(toHeight);
+                }
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        SetSeaLevel();
+    }
+
     public void SetSeaLevel()
     {
         foreach (Cell cell in allCells)
@@ -98,12 +157,7 @@ public class GridGenerator : MonoBehaviour
                 cell.altitude = (float) stats.seaLevel / 4;
                 cell.UpdateTile();
             }
-            
         }
-        
-        _audioSource.PlayOneShot(_audioSource.clip);
-        
-        
     }
     
     Vector3 CoordToPosition(int x, int y, Vector3 scale)
