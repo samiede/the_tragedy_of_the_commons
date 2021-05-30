@@ -15,6 +15,7 @@ public enum CellType {
     Default
 }
 
+[ExecuteInEditMode]
 public class Cell : MonoBehaviour
 {
     public CellType type;
@@ -33,6 +34,8 @@ public class Cell : MonoBehaviour
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
+    public float CoalAmount => coal;
+    
     [SerializeField] private float coalPerTick;
     [SerializeField] private float pollutionPerTick;
 
@@ -51,6 +54,7 @@ public class Cell : MonoBehaviour
     [Header("Stats")] [SerializeField] private GameStats stats;
     
     [SerializeField] private bool isBuiltOn = false;
+    public bool IsBuiltOn => isBuiltOn;
     private float nextTick = 0f;
     private GameObject topObject;
 

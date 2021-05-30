@@ -14,5 +14,6 @@ public class MapEditor : Editor
         {
             map.GenerateMap();
         }
+        
     }
 }

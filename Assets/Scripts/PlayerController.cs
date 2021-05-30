@@ -1,18 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private GameStats stats;
     [SerializeField] private Camera _camera;
+    
+    [Header("Very hacky UI")]
     [SerializeField] private GameObject buildingUI;
     [SerializeField] private Canvas buildingCanvas;
+    [SerializeField] private TextMeshProUGUI popupTitle;
+    [SerializeField] private TextMeshProUGUI buildingPrice;
+    [SerializeField] private TextMeshProUGUI amountRemaining;
+    [SerializeField] private GameObject buildButton;
 
-    // Update is called once per frame
+    private Cell selectedCell;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -30,7 +35,13 @@ public class PlayerController : MonoBehaviour
                 Cell cell = hit.transform.GetComponent<Cell>();
                 if (cell.type == CellType.Coal || cell.type == CellType.Wind)
                 {
-                    OpenBuildingUI(Input.mousePosition);
+                    Debug.Log(selectedCell);
+                    if (cell != selectedCell)
+                    {
+                        selectedCell = cell;
+                        OpenBuildingUI();
+                    }
+
                 } else 
                     DismissBuildingUI();
             }
@@ -40,33 +51,63 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        else if (Input.GetButtonDown("Fire1") && EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Over UI");
+        }
     }
+    
+    
 
-    private void OpenBuildingUI(Vector3 position)
+    private void OpenBuildingUI()
     {
         buildingCanvas.gameObject.SetActive(true);
+        if (selectedCell.type == CellType.Coal)
+        {
+            amountRemaining.enabled = true;
+            if (selectedCell.IsBuiltOn)
+            {
+                popupTitle.SetText("Mine");
+                buildButton.SetActive(false);
+                buildingPrice.enabled = false;
+            }
+            else
+            {
+                buildingPrice.enabled = true;
+                popupTitle.SetText("Coal");
+                buildingPrice.SetText("Price: " + stats.minePrice);
+            }
+            amountRemaining.SetText("Coal: " + selectedCell.CoalAmount);
+        }
         
-        // Offset position above object bbox (in world space)
-        float offsetPosX = position.x + 1.5f;
-        float offsetPosY = position.y + 1.5f;
-        // Final position of marker above GO in world space
-        Vector3 offsetPos = new Vector3(offsetPosX, offsetPosY, position.z);
- 
-        // Calculate *screen* position (note, not a canvas/recttransform position)
-        Vector2 canvasPos;
-        Vector2 screenPoint = _camera.WorldToScreenPoint(offsetPos);
- 
-        // Convert screen position to Canvas / RectTransform space <- leave camera null if Screen Space Overlay
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(buildingCanvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
- 
-        // Set
-        buildingUI.transform.localPosition = canvasPos;
+        else if (selectedCell.type == CellType.Wind)
+        {
+            if (selectedCell.IsBuiltOn)
+            {
+                popupTitle.SetText("Windmill");
+                buildButton.SetActive(false);
+                buildingPrice.enabled = false;
+            }
+            else
+            {
+                buildingPrice.enabled = true;
+                popupTitle.SetText("Wind");
+                buildingPrice.SetText("Price: " + stats.windmillPrice);
+            }
+
+            amountRemaining.enabled = false;
+        }
+
+        Vector3 pos = Input.mousePosition + new Vector3(60, 0);
+        pos.z = 0;
+        buildingUI.transform.position = pos;
         
 
     }
 
     private void DismissBuildingUI()
     {
+        selectedCell = null;
         buildingCanvas.gameObject.SetActive(false);
     }
     
