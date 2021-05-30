@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
             if (currentYear == endYear)
             {
                 isRunning = false;
-                Debug.Log("You Won");
+                SceneManager.LoadScene("YouWonScreen");
             }
         }
 
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         if (tempSeaLevel == 5)
         {
             isRunning = false;
+            SceneManager.LoadScene("YouLostScreen");
             Debug.Log("Yoi lopse");
         }
     }
