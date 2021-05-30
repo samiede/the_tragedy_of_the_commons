@@ -105,12 +105,12 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: a35db3714b33a44ceaa103f92656c309, type: 3}
   - {fileID: 919132149155446097, guid: b498ad41b24d347cba222c9bac0e3190, type: 3}
   - {fileID: 919132149155446097, guid: a8a0b4e55b9a4438ca04bffb6d05810b, type: 3}
-  urbanPerTick: 0
-  urbanPollutionPerTick: 0
-  urbanCooldown: 0
+  urbanPerTick: 2
+  urbanPollutionPerTick: 1
+  urbanCooldown: 1
   windColor: {fileID: 2100000, guid: 8ca4177855e45467eacbc270dcd86de5, type: 2}
-  windCooldown: 0
-  windPerTick: 0
+  windCooldown: 1
+  windPerTick: 0.25
   windmillPrefab: {fileID: 919132149155446097, guid: 7cc5c18e6a63e49fd97a1088a1a6c387, type: 3}
   windPrefab: {fileID: 0}
   coalColor: {fileID: 2100000, guid: 4a1dc19ed8ae04571af10fd793b42c04, type: 2}
@@ -120,8 +120,8 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: d1ab83c26335d4318a8494f2c149d6c7, type: 3}
   - {fileID: 919132149155446097, guid: ad5a465cd3ab148f98c6dbf0a2278d61, type: 3}
   - {fileID: 919132149155446097, guid: 41e9343a8b3004d73b66aef2cd39c524, type: 3}
-  coal: 1000
-  coalPerTick: 10
+  coal: 200
+  coalPerTick: 0.8
   pollutionPerTick: 1
   waterColor: {fileID: 2100000, guid: 3913af2f3d9424f44940251e32e3b746, type: 2}
   forestColor: {fileID: 2100000, guid: ba462bc7a464740dd8b9b40486afc9d0, type: 2}
@@ -135,6 +135,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 3938072863882221343}
   stats: {fileID: 11400000, guid: 294d0ac223f974012a3b297131486c81, type: 2}
   PollutionIncreased: {fileID: 11400000, guid: 7dd3b0e5f85f54797bf2879588b92d2e, type: 2}
+  MoneyChanged: {fileID: 11400000, guid: e9b4afb647fb2403ba769e01b275584c, type: 2}
+  buildParticles: {fileID: 9165347174511659982, guid: 27f4b942846cf4d9da620291d7efbc3b, type: 3}
   isBuiltOn: 0
 --- !u!65 &1094678211248548498
 BoxCollider:

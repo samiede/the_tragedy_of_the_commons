@@ -10,6 +10,12 @@ public class GameStats : ScriptableObject
     public float pollution = 0f;
     public float money = 0;
     public int seaLevel = 0;
+    public int currentYear;
+    
+    [Header("Initial values")]
+    public float initialPollution = 0f;
+    public float initialMoney = 0;
+    public int initialSeaLevel = 0;
     
     [Header("Building Prices")] 
     public int minePrice = 1000;
@@ -22,8 +28,8 @@ public class GameStats : ScriptableObject
 
     public void Reset()
     {
-        pollution = 0;
-        money = 0;
-        seaLevel = 0;
+        pollution = initialPollution;
+        money = initialMoney;
+        seaLevel = initialSeaLevel;
     }
 }

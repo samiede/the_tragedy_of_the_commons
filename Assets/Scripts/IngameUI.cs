@@ -8,19 +8,29 @@ public class IngameUI : MonoBehaviour
 {
     public TextMeshProUGUI pollutionText;
     public TextMeshProUGUI moneyText;
-    public TextMeshProUGUI seaLevelText;
+    public TextMeshProUGUI currentYearText;
     //GameStats pollution;
     public GameStats stats;
 
     private void Start()
     {
-        UpdateTexts();
+        UpdatePollution();
+        UpdateMoney();
+        UpdateCurrentYear();
     }
 
-    public void UpdateTexts()
+    public void UpdatePollution()
     {
         pollutionText.SetText("Pollution: " + stats.pollution);
+    }
+
+    public void UpdateMoney()
+    {
         moneyText.SetText("Money: " + stats.money);
-        seaLevelText.SetText("Sea Level: " + stats.seaLevel);
+    }
+
+    public void UpdateCurrentYear()
+    {
+        currentYearText.SetText("Year: " + stats.currentYear);
     }
 }

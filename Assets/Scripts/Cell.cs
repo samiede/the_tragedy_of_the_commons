@@ -59,6 +59,8 @@ public class Cell : MonoBehaviour
     [Header("Stats and Events")] 
     [SerializeField] private GameStats stats;
     [SerializeField] private GameEvent PollutionIncreased;
+    [SerializeField] private GameEvent MoneyChanged;
+    [SerializeField] private GameObject buildParticles;
     
     [SerializeField] private bool isBuiltOn = false;
     public bool IsBuiltOn => isBuiltOn;
@@ -146,6 +148,8 @@ public class Cell : MonoBehaviour
                         coal -= coalPerTick;
                         nextTick = Time.time + coalCooldown;
                         PollutionIncreased.Raise();
+                        MoneyChanged.Raise();
+
                     }
                     break;
                 case CellType.Wind:
@@ -153,20 +157,23 @@ public class Cell : MonoBehaviour
                     {
                         stats.money += windPerTick;
                         nextTick = Time.time + windCooldown;
-                    }
-                    break;
-                case CellType.Urban:
-                    if (Time.time >= nextTick)
-                    {
-                        stats.money += urbanPerTick;
-                        stats.pollution += urbanPollutionPerTick;
-                        nextTick = Time.time + urbanCooldown;
-                        PollutionIncreased.Raise();
+                        MoneyChanged.Raise();
                     }
                     break;
                 case CellType.Default:
                     break;
             }
+        }
+
+        if (type == CellType.Urban && Time.time >= nextTick)
+        {
+
+                stats.money += urbanPerTick;
+                stats.pollution += urbanPollutionPerTick;
+                nextTick = Time.time + urbanCooldown;
+                PollutionIncreased.Raise();
+                MoneyChanged.Raise();
+            
         }
     }
 
@@ -197,6 +204,8 @@ public class Cell : MonoBehaviour
             }
             topObject = Instantiate(windmillPrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
         }
+
+        Instantiate(buildParticles, spawnPoint.position, Quaternion.identity);
 
     }
 }

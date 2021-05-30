@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject buildButton;
 
     private Cell selectedCell;
+    public Cell SelectedCell => selectedCell;
     
     void Update()
     {
@@ -35,7 +36,6 @@ public class PlayerController : MonoBehaviour
                 Cell cell = hit.transform.GetComponent<Cell>();
                 if (cell.type == CellType.Coal || cell.type == CellType.Wind)
                 {
-                    Debug.Log(selectedCell);
                     if (cell != selectedCell)
                     {
                         selectedCell = cell;
@@ -51,10 +51,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (Input.GetButtonDown("Fire1") && EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("Over UI");
-        }
+
     }
     
     
