@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameStats stats;
+    [SerializeField] private GameEvent SeaLevelRising;
+
     // [SerializeField] private int seaLevel;
     void Start()
     {
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
         if (tempSeaLevel > stats.seaLevel)
         {
             stats.seaLevel = tempSeaLevel;
+            SeaLevelRising.Raise();
             
         }
     }

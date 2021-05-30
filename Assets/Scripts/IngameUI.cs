@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,13 @@ public class IngameUI : MonoBehaviour
     public TextMeshProUGUI seaLevelText;
     //GameStats pollution;
     public GameStats stats;
-    // Start is called before the first frame update
 
+    private void Start()
+    {
+        UpdateTexts();
+    }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateTexts()
     {
         pollutionText.SetText("Pollution: " + stats.pollution);
         moneyText.SetText("Money: " + stats.money);
