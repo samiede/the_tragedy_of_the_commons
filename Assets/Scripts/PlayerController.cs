@@ -1,15 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private GameStats stats;
     [SerializeField] private Camera _camera;
+    
+    [Header("Very hacky UI")]
+    [SerializeField] private GameObject buildingUI;
+    [SerializeField] private Canvas buildingCanvas;
+    [SerializeField] private TextMeshProUGUI popupTitle;
+    [SerializeField] private TextMeshProUGUI buildingPrice;
+    [SerializeField] private TextMeshProUGUI amountRemaining;
+    [SerializeField] private GameObject buildButton;
 
-    // Update is called once per frame
+    private Cell selectedCell;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -17,7 +25,7 @@ public class PlayerController : MonoBehaviour
             stats.money += 100;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject())
         {
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -25,12 +33,83 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 6))
             {
                 Cell cell = hit.transform.GetComponent<Cell>();
-                if (cell)
+                if (cell.type == CellType.Coal || cell.type == CellType.Wind)
                 {
-                    cell.Build();
-                }
+                    Debug.Log(selectedCell);
+                    if (cell != selectedCell)
+                    {
+                        selectedCell = cell;
+                        OpenBuildingUI();
+                    }
+
+                } else 
+                    DismissBuildingUI();
+            }
+            else
+            {
+                DismissBuildingUI();
             }
 
         }
+        else if (Input.GetButtonDown("Fire1") && EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Over UI");
+        }
     }
+    
+    
+
+    private void OpenBuildingUI()
+    {
+        buildingCanvas.gameObject.SetActive(true);
+        if (selectedCell.type == CellType.Coal)
+        {
+            amountRemaining.enabled = true;
+            if (selectedCell.IsBuiltOn)
+            {
+                popupTitle.SetText("Mine");
+                buildButton.SetActive(false);
+                buildingPrice.enabled = false;
+            }
+            else
+            {
+                buildingPrice.enabled = true;
+                popupTitle.SetText("Coal");
+                buildingPrice.SetText("Price: " + stats.minePrice);
+            }
+            amountRemaining.SetText("Coal: " + selectedCell.CoalAmount);
+        }
+        
+        else if (selectedCell.type == CellType.Wind)
+        {
+            if (selectedCell.IsBuiltOn)
+            {
+                popupTitle.SetText("Windmill");
+                buildButton.SetActive(false);
+                buildingPrice.enabled = false;
+            }
+            else
+            {
+                buildingPrice.enabled = true;
+                popupTitle.SetText("Wind");
+                buildingPrice.SetText("Price: " + stats.windmillPrice);
+            }
+
+            amountRemaining.enabled = false;
+        }
+
+        Vector3 pos = Input.mousePosition + new Vector3(60, 0);
+        pos.z = 0;
+        buildingUI.transform.position = pos;
+        
+
+    }
+
+    private void DismissBuildingUI()
+    {
+        selectedCell = null;
+        buildingCanvas.gameObject.SetActive(false);
+    }
+    
+    
 }

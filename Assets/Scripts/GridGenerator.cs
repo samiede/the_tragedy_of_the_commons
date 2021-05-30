@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-
 public class GridGenerator : MonoBehaviour
 {
     [SerializeField] private Vector2Int mapSize;
@@ -30,9 +29,9 @@ public class GridGenerator : MonoBehaviour
         mapHolder.parent = transform;
         
 
-        int[,] mapCoal = new int[mapSize.x,mapSize.y];
-        //Debug.Log("x:" + mapSize.x + ", y: " + mapSize.y);
-        using(var reader = new StreamReader(@"/home/frederik/Schreibtisch/Tomorrowcraft/map_island.csv")) // need to use relative path
+        int[,] mapCoal = new int[mapSize.x,mapSize.y]; 
+        string m_Path = Application.dataPath + "/map_island.csv";
+        using(var reader = new StreamReader(@m_Path)) // need to use relative path
         {
             List<string> listA = new List<string>();
             List<string> listB = new List<string>();
@@ -51,11 +50,7 @@ public class GridGenerator : MonoBehaviour
                     j += 1;
                 }
                 i += 1;
-
                 
-                
-                //Console.WriteLine(String.Join("\n", arr)); 
-                //Debug.Log("Debug: " + String.Join("",new List<int>(values).ConvertAll(i => i.ToString()).ToArray()));
                 listA.Add(values[0]);          
                 listB.Add(values[1]);
 
@@ -92,11 +87,10 @@ public class GridGenerator : MonoBehaviour
                     else if (mapCoal[x, y] == 0)
                     {
                         newTile.type = CellType.Default;
-                        //newTile.altitude = 1; how to do this?
                     }
                     
-                    
-
+                    // newTile.altitude = 1;
+                
                     allCells.Add(newTile);
             }
         }

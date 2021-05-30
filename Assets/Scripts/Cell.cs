@@ -14,6 +14,8 @@ public enum CellType {
     Forest,
     Default
 }
+
+[ExecuteInEditMode]
 public class Cell : MonoBehaviour
 {
     public CellType type;
@@ -32,7 +34,10 @@ public class Cell : MonoBehaviour
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private List<GameObject> coalPrefabs;
     [SerializeField] private float coal;
+    public float CoalAmount => coal;
+    
     [SerializeField] private float coalPerTick;
+    [SerializeField] private float pollutionPerTick;
 
     [Header("Environment")] 
     [SerializeField] private Material waterColor;
@@ -43,12 +48,13 @@ public class Cell : MonoBehaviour
     [Header("Default")] 
     [SerializeField] private Transform defaultPrefab;
     [SerializeField] private Material defaultColor;
-    [SerializeField] private float altitude = 0;
+    [SerializeField] public float altitude = 0;
     [SerializeField] private Transform spawnPoint;
 
     [Header("Stats")] [SerializeField] private GameStats stats;
     
     [SerializeField] private bool isBuiltOn = false;
+    public bool IsBuiltOn => isBuiltOn;
     private float nextTick = 0f;
     private GameObject topObject;
 
@@ -65,7 +71,11 @@ public class Cell : MonoBehaviour
          
          float scale = Random.Range(0.5f, 1f);
          Vector3 localScaleVect = new Vector3(scale, scale, scale);
-        
+         
+         transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
+         Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - 0.2f - transform.localScale.y / 2)), transform.position.z);
+         transform.localPosition = pos;
+         
         switch (type)
         {
             case CellType.Urban:
@@ -75,8 +85,6 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = windColor;
                 break;
             case CellType.Water:
-                // topObject = Instantiate(waterPrefab, spawnPoint.position, Quaternion.identity);
-                // topObject.transform.parent = transform;
                 GetComponent<MeshRenderer>().material = waterColor;
                 break;
             case CellType.Coal:
@@ -97,10 +105,6 @@ public class Cell : MonoBehaviour
                 GetComponent<MeshRenderer>().material = defaultColor;
                 break;
         }
-
-        transform.localScale = new Vector3(1f, Mathf.Max(0.2f, altitude), 1f);
-        Vector3 pos = new Vector3(transform.position.x, Mathf.Max(0f,(altitude - transform.localScale.y / 2)), transform.position.z);
-        transform.localPosition = pos;
     }
 
     private void OnValidate()
@@ -120,6 +124,7 @@ public class Cell : MonoBehaviour
                     if (Time.time >= nextTick && coal > 0)
                     {
                         stats.money += coalPerTick;
+                        stats.pollution += pollutionPerTick;
                         coal -= coalPerTick;
                         nextTick = Time.time + coalCooldown;
                     }
