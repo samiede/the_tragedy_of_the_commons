@@ -48,28 +48,28 @@ public class GameManager : MonoBehaviour
     public void CheckSeaLevel()
     {
         int tempSeaLevel = 0;
-        if (stats.pollution > 0 && stats.pollution < 200)
+        if (stats.pollution > 0 && stats.pollution < 2000)
         {
             tempSeaLevel = 0;
         }
 
-        if (stats.pollution >= 200 && stats.pollution < 400)
+        if (stats.pollution >= 2000 && stats.pollution < 4000)
         {
             tempSeaLevel = 1;
         } 
-        if (stats.pollution >= 400 && stats.pollution < 600)
+        if (stats.pollution >= 4000 && stats.pollution < 6000)
         {
             tempSeaLevel = 2;
         } 
-        if (stats.pollution >= 600 && stats.pollution < 800)
+        if (stats.pollution >= 6000 && stats.pollution < 8000)
         {
             tempSeaLevel = 3;
         }         
-        if (stats.pollution >= 800 && stats.pollution < 1000)
+        if (stats.pollution >= 8000 && stats.pollution < 10000)
         {
             tempSeaLevel = 4;
         }         
-        if (stats.pollution >= 1000)
+        if (stats.pollution >= 10000)
         {
             tempSeaLevel = 5;
         }
