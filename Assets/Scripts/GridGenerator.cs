@@ -32,7 +32,7 @@ public class GridGenerator : MonoBehaviour
 
         int[,] mapCoal = new int[mapSize.x,mapSize.y];
         //Debug.Log("x:" + mapSize.x + ", y: " + mapSize.y);
-        using(var reader = new StreamReader(@"/home/frederik/Schreibtisch/Tomorrowcraft/coal_map.csv"))
+        using(var reader = new StreamReader(@"/home/frederik/Schreibtisch/Tomorrowcraft/map_island.csv")) // need to use relative path
         {
             List<string> listA = new List<string>();
             List<string> listB = new List<string>();
@@ -47,9 +47,7 @@ public class GridGenerator : MonoBehaviour
                 foreach (var val in values)
                 {
                     
-                    Debug.Log(mapCoal[j, i]);
-                    mapCoal[j, i] = Int32.Parse(val);
-                    //Debug.Log(wert);
+                    mapCoal[i, j] = Int32.Parse(val);
                     j += 1;
                 }
                 i += 1;
@@ -94,7 +92,9 @@ public class GridGenerator : MonoBehaviour
                     else if (mapCoal[x, y] == 0)
                     {
                         newTile.type = CellType.Default;
+                        //newTile.altitude = 1; how to do this?
                     }
+                    
                     
 
                     allCells.Add(newTile);
