@@ -23,11 +23,16 @@ public class Cell : MonoBehaviour
     [Header("Urban")]
     [SerializeField] private Material urbanColor;
     [SerializeField] private List<GameObject> urbanPrefabs;
+    [SerializeField] private float urbanPerTick;
+    [SerializeField] private float urbanPollutionPerTick;
+    [SerializeField] private float urbanCooldown;
     
     [Header("Wind")]
     [SerializeField] private Material windColor;
     [SerializeField] private float windCooldown;
     [SerializeField] private float windPerTick;
+    [SerializeField] private GameObject windmillPrefab;
+    [SerializeField] private GameObject windPrefab;
     [Header("Coal")]
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
@@ -80,8 +85,19 @@ public class Cell : MonoBehaviour
         {
             case CellType.Urban:
                 GetComponent<MeshRenderer>().material = urbanColor;
+                topObject = Instantiate(urbanPrefabs[Random.Range(0, urbanPrefabs.Count)], spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+                topObject.transform.localScale = localScaleVect;
+                topObject.transform.parent = transform;
+                break;
                 break;
             case CellType.Wind:
+                if (isBuiltOn)
+                {
+                    topObject = Instantiate(windmillPrefab, spawnPoint.position,
+                        Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+                    topObject.transform.localScale = localScaleVect;
+                    topObject.transform.parent = transform;
+                }
                 GetComponent<MeshRenderer>().material = windColor;
                 break;
             case CellType.Water:
@@ -136,6 +152,14 @@ public class Cell : MonoBehaviour
                         nextTick = Time.time + windCooldown;
                     }
                     break;
+                case CellType.Urban:
+                    if (Time.time >= nextTick)
+                    {
+                        stats.money += urbanPerTick;
+                        stats.pollution += urbanPollutionPerTick;
+                        nextTick = Time.time + urbanCooldown;
+                    }
+                    break;
                 case CellType.Default:
                     break;
             }
@@ -159,5 +183,16 @@ public class Cell : MonoBehaviour
             }
             topObject = Instantiate(minePrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
         }
+        
+        if (type == CellType.Wind)
+        {
+            isBuiltOn = true;
+            if (topObject != null)
+            {
+                Destroy(topObject.gameObject);
+            }
+            topObject = Instantiate(windmillPrefab, spawnPoint.position, Quaternion.Euler(0f, Random.Range(0, 360), 0f));
+        }
+
     }
 }

@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
                 buildingPrice.enabled = true;
                 popupTitle.SetText("Wind");
                 buildingPrice.SetText("Price: " + stats.windmillPrice);
+                stats.money -= stats.windmillPrice;
+
             }
 
             amountRemaining.enabled = false;
@@ -103,6 +105,14 @@ public class PlayerController : MonoBehaviour
         buildingUI.transform.position = pos;
         
 
+    }
+
+    public void BuildOnSelectedCell()
+    {
+
+        stats.money -= (selectedCell.type == CellType.Coal) ? stats.minePrice : stats.windmillPrice; 
+        selectedCell.Build();
+        DismissBuildingUI();
     }
 
     private void DismissBuildingUI()

@@ -89,8 +89,6 @@ public class GridGenerator : MonoBehaviour
                         newTile.type = CellType.Default;
                     }
                     
-                    // newTile.altitude = 1;
-                
                     allCells.Add(newTile);
             }
         }
