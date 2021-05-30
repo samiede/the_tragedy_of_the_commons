@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         {
             isRunning = false;
             SceneManager.LoadScene("YouLostScreen");
-            Debug.Log("Yoi lopse");
+
         }
     }
     
