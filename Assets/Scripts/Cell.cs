@@ -48,7 +48,7 @@ public class Cell : MonoBehaviour
     [Header("Default")] 
     [SerializeField] private Transform defaultPrefab;
     [SerializeField] private Material defaultColor;
-    [SerializeField] private float altitude = 0;
+    [SerializeField] public float altitude = 0;
     [SerializeField] private Transform spawnPoint;
 
     [Header("Stats")] [SerializeField] private GameStats stats;
