@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using DefaultNamespace;
 
 public class GridGenerator : MonoBehaviour
 {
@@ -40,26 +41,18 @@ public class GridGenerator : MonoBehaviour
         mapHolder.parent = transform;
         
 
-        int[,] mapCoal = new int[mapSize.x*2,mapSize.y]; 
-        string m_Path = Application.dataPath + "/map_island3.csv";
-        using(var reader = new StreamReader(@m_Path))
+        int[,] mapCoal = new int[mapSize.x*2,mapSize.y];
+        
+        for (int i = 0; i < mapSize.x*2; i++) 
         {
-            int i = 0;
-            while (!reader.EndOfStream)
+            Debug.Log("i: " + i);
+            for (int j = 0; j < mapSize.y; j++)
             {
-                
-                var line = reader.ReadLine();
-                var values = line.Split(',');
-                
-                int j = 0;
-                foreach (var val in values)
-                {
-                    mapCoal[i, j] = Int32.Parse(val);
-                    j += 1;
-                }
-                i += 1;
+                Debug.Log("j: " + j);
+                mapCoal[i, j] = Map.map[i*mapSize.x+j];
             }
         }
+        
 
         
         for (int x = 0; x < mapSize.x; x++)
@@ -92,12 +85,6 @@ public class GridGenerator : MonoBehaviour
                     {
                         newTile.type = CellType.Forest;
                     }
-                   
-                    
-                    
-                    
-                    
-                    
                 
                     allCells.Add(newTile);
             }
