@@ -6,13 +6,45 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameStats stats;
     [SerializeField] private GameEvent SeaLevelRising;
-
+    [SerializeField] private GameEvent YearIncreased;
+    [SerializeField] private int startYear;
+    [SerializeField] private int endYear;
+    [SerializeField] private int secondsPerYear;
+    
+    private bool isRunning;
+    private WaitForSeconds yearTime;
+    
+    
     // [SerializeField] private int seaLevel;
     void Start()
     {
         stats.Reset();
-        
+        isRunning = true;
+        yearTime = new WaitForSeconds(secondsPerYear);
+        stats.currentYear = startYear;
+        YearIncreased.Raise();
+        StartCoroutine(CountUpYears());
     }
+
+
+    IEnumerator CountUpYears()
+    {
+        int currentYear = startYear;
+        while (isRunning)
+        {
+            yield return yearTime;
+            currentYear++;
+            stats.currentYear = currentYear;
+            YearIncreased.Raise();
+            if (currentYear == endYear)
+            {
+                isRunning = false;
+                Debug.Log("You Won");
+            }
+        }
+
+    }
+    
 
     public void CheckSeaLevel()
     {
@@ -48,6 +80,12 @@ public class GameManager : MonoBehaviour
             stats.seaLevel = tempSeaLevel;
             SeaLevelRising.Raise();
             
+        }
+
+        if (tempSeaLevel == 5)
+        {
+            isRunning = false;
+            Debug.Log("Yoi lopse");
         }
     }
     

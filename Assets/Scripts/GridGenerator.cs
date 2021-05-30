@@ -9,11 +9,21 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private Vector2Int mapSize;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private GameStats stats;
+    
     private Coord mapCenter;
+    private AudioSource _audioSource;
+    
     
     private List<Cell> allCells;
     public List<Cell> AlLCell => allCells;
     
+    private void Start()
+    {
+        GenerateMap();
+        _audioSource = GetComponent<AudioSource>();
+
+    }
+
     public void GenerateMap()
     {
         allCells = new List<Cell>();
@@ -94,10 +104,6 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GenerateMap();
-    }
 
     public void SetSeaLevel()
     {
@@ -111,6 +117,9 @@ public class GridGenerator : MonoBehaviour
             }
             
         }
+        
+        _audioSource.PlayOneShot(_audioSource.clip);
+        
         
     }
     
