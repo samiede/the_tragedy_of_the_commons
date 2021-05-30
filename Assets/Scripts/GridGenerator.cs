@@ -44,7 +44,6 @@ public class GridGenerator : MonoBehaviour
                 int j = 0;
                 foreach (var val in values)
                 {
-                    Debug.Log(val);
                     mapCoal[i, j] = Int32.Parse(val);
                     j += 1;
                 }
@@ -66,7 +65,7 @@ public class GridGenerator : MonoBehaviour
                     {
                         newTile.type = CellType.Urban;
                     }
-                    else if (mapCoal[x, y] == 2)
+                    else if (mapCoal[x, y] == 2 || mapCoal[x, y] == 0)
                     {
                         newTile.type = CellType.Wind;
                     }
@@ -74,7 +73,7 @@ public class GridGenerator : MonoBehaviour
                     {
                         newTile.type = CellType.Coal;
                     }
-                    else if (mapCoal[x, y] == 4)
+                    else if (mapCoal[x, y] == 4 || mapCoal[x, y] == -1)
                     {
                         newTile.type = CellType.Water;
                         newTile.altitude = 0;
@@ -83,11 +82,7 @@ public class GridGenerator : MonoBehaviour
                     {
                         newTile.type = CellType.Forest;
                     }
-                    else if (mapCoal[x, y] == 0)
-                    {
-                        newTile.type = CellType.Default;                        
-                    }
-
+                   
                     
                     
                     

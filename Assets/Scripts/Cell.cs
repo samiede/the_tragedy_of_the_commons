@@ -33,6 +33,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private float windPerTick;
     [SerializeField] private GameObject windmillPrefab;
     [SerializeField] private GameObject windPrefab;
+    
     [Header("Coal")]
     [SerializeField] private Material coalColor;
     [SerializeField] private float coalCooldown;
