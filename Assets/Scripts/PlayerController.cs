@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buildingPrice;
     [SerializeField] private TextMeshProUGUI amountRemaining;
     [SerializeField] private GameObject buildButton;
+    [SerializeField] private GameEvent MoneyChanged;
 
     private Cell selectedCell;
     private AudioSource _audioSource;
@@ -100,7 +101,6 @@ public class PlayerController : MonoBehaviour
                 buildingPrice.enabled = true;
                 popupTitle.SetText("Wind");
                 buildingPrice.SetText("Price: " + stats.windmillPrice);
-                stats.money -= stats.windmillPrice;
 
             }
 
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
     {
         stats.money -= (selectedCell.type == CellType.Coal) ? stats.minePrice : stats.windmillPrice; 
         selectedCell.Build();
+        MoneyChanged.Raise();
         DismissBuildingUI();
     }
 

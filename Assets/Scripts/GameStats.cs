@@ -11,6 +11,7 @@ public class GameStats : ScriptableObject
     public float money = 0;
     public int seaLevel = 0;
     public int currentYear;
+    public int timeScale = 1;
     
     [Header("Initial values")]
     public float initialPollution = 0f;
