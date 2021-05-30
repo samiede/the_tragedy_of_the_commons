@@ -56,7 +56,9 @@ public class Cell : MonoBehaviour
     [SerializeField] public float altitude = 0;
     [SerializeField] private Transform spawnPoint;
 
-    [Header("Stats")] [SerializeField] private GameStats stats;
+    [Header("Stats and Events")] 
+    [SerializeField] private GameStats stats;
+    [SerializeField] private GameEvent PollutionIncreased;
     
     [SerializeField] private bool isBuiltOn = false;
     public bool IsBuiltOn => isBuiltOn;
@@ -143,6 +145,7 @@ public class Cell : MonoBehaviour
                         stats.pollution += pollutionPerTick;
                         coal -= coalPerTick;
                         nextTick = Time.time + coalCooldown;
+                        PollutionIncreased.Raise();
                     }
                     break;
                 case CellType.Wind:
@@ -158,6 +161,7 @@ public class Cell : MonoBehaviour
                         stats.money += urbanPerTick;
                         stats.pollution += urbanPollutionPerTick;
                         nextTick = Time.time + urbanCooldown;
+                        PollutionIncreased.Raise();
                     }
                     break;
                 case CellType.Default:

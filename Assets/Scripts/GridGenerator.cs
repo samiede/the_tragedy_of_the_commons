@@ -9,7 +9,6 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private Vector2Int mapSize;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private GameStats stats;
-
     private Coord mapCenter;
     
     private List<Cell> allCells;
@@ -108,10 +107,10 @@ public class GridGenerator : MonoBehaviour
     {
         foreach (Cell cell in allCells)
         {
-            if (cell.altitude <= stats.seaLevel)
+            if (cell.altitude <= (float) stats.seaLevel / 4)
             {
                 cell.type = CellType.Water;
-                cell.altitude = stats.seaLevel;
+                cell.altitude = (float) stats.seaLevel / 4;
                 cell.UpdateTile();
             }
             

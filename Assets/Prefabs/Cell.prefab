@@ -134,6 +134,7 @@ MonoBehaviour:
   altitude: 0
   spawnPoint: {fileID: 3938072863882221343}
   stats: {fileID: 11400000, guid: 294d0ac223f974012a3b297131486c81, type: 2}
+  PollutionIncreased: {fileID: 11400000, guid: 7dd3b0e5f85f54797bf2879588b92d2e, type: 2}
   isBuiltOn: 0
 --- !u!65 &1094678211248548498
 BoxCollider:
